@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <style>
+        body
+        {
+        display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+          font-size: 25px;
+          background: url("https://wallpaperaccess.com/full/753391.jpg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: inherit;
+        }
+        .login-container {
+          border: 3px solid black;
+          padding: 20px;
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        .error-message {
+          color: red;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" style="background-image: linear-gradient(white,grey)">
+    <h1>Signup</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('signup') }}" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br><br>
+        <input type="submit" value="Signup">
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Management System</title>
+    <style>
+        body
+        {
+            background: url("https://wallpaperaccess.com/full/753391.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: inherit;
+            
+        }
+        th,td,tr
+        {
+            border: 1px solid black;
+        }
+
+    </style>
+    <h1 style="font-size: 24px; text-align: center;">
+        ██████████████████████████████████████████████████████████████████████████████
+        █▄─▀█▀─▄█▄─▄▄─█▄─▀█▄─▄█─▄─▄─█─▄▄─█▄─▄▄▀████▀▄─██▄─▀█▄─▄█▄─▄▄▀███▄─▀█▀─▄█▄─▄▄─█
+        ██─█▄█─███─▄█▀██─█▄▀─████─███─██─██─▄─▄████─▀─███─█▄▀─███─██─████─█▄█─███─▄█▀█
+        ▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▄▄▄▀▄▄▀▄▄▀▀▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▀▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀</h1>
+</head>
+<body>
+    {% if ums["logged_in_user"] %}
+        <center><p style="color: black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: x-large;">Welcome, {{ ums["logged_in_user"]}}!</p></center>
+        <center><a href="{{ url_for('logout') }}" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger; color: black;">Logout</a></center>
+    {% else %}
+        <center><a href="{{ url_for('signup') }}" style="color: black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Signup</a></center><br>
+        <center><a href="{{ url_for('login') }}" style="color: black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Login</a></center>
+    {% endif %}
+    <br><br>
+    <center><h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Add a New Course</h2></center>
+    <center><form action="{{ url_for('add_course') }}" method="POST" style="border: 2px solid black; border-radius: 5px; padding: 20px; display: flex; justify-content: center; align-items: center; height: 50vh; width: 30%; flex-direction: column; background-image: linear-gradient(white, grey);">
+        <label for="name" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Course Name:</label>
+        <input type="text" name="name" id="name" required><br><br>
+        <label for="subject" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Subject:</label>
+        <input type="text" name="subject" required><br><br>
+        <label for="level" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Level:</label>
+        <input type="text" name="level" required><br><br>
+        <label for="instructor" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Instructor:</label>
+        <input type="text" name="instructor" required><br><br>
+        <label for="rating" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Rating:</label>
+        <input type="number" step="0.1" min="0" max="5" name="rating" required><br><br>
+        <input type="submit" value="Add Course" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"></center>
+    </form>
+    <br><br>
+    <center><h2>Course List</h2></center>
+    <center><table style="border: 1px solid black; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger; padding: 5px;"></center>
+        <tr>
+            <th>Course Name</th>
+            <th>Subject</th>
+            <th>Level</th>
+            <th>Instructor</th>
+            <th>Rating</th>
+        </tr>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course[0] }}</td>
+                <td>{{ course[1] }}</td>
+                <td>{{ course[2] }}</td>
+                <td>{{ course[3] }}</td>
+                <td>{{ course[4] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
